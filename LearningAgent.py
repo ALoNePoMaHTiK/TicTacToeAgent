@@ -32,7 +32,8 @@ class LearningAgent():
         for i in product(' XO', repeat=9):
             word = ''.join(i)
             value = 0.5
-            states[word] = (len(states), value)
+            if abs(word.count('O')-word.count('X')) <=1:
+                states[word] = (len(states), value)
         return states
 
     # Сеттер для карты
@@ -87,4 +88,4 @@ class LearningAgent():
             self.Winning += 1
         for step in self.steps:
             temp = self.leaningMatrix[step]
-            self.leaningMatrix[step] = (temp[0],temp[1]+0.4*((result==WIN)-temp[1]))
+            self.leaningMatrix[step] = (temp[0],temp[1]+0.075*((result==WIN)-temp[1]))
